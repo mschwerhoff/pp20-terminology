@@ -14,7 +14,7 @@
 <dt>abstractly atomic</dt>
 <dd>A statement or instruction that, at a certain level of abstraction, appears to be executed atomically. E.g. from a caller's perspective, a method <code>synchronized append(x)</code> of a queue appears to append element <code>x</code> in one step, but from the queue's perspective, this might take several steps.</dd>
 <dt>bad interleaving</dt>
-<dd>An interleaving that yields a problematic or otherwise undesirable computation. E.g. an incorrect result, a deadlock or nondeterministic output.</dd>
+<dd>An interleaving that yields a problematic or otherwise undesirable computation. E.g. an incorrect result, a deadlock or non-deterministic output.</dd>
 <dt>busy waiting</dt>
 <dd>Occurs when a thead busily (actively) waits for a condition to become true by spinning in a loop. In the opposite scenario, the thread sleeps (i.e. is blocked; in Java: <code>join()</code>, <code>wait()</code>) until the condition becomes true. Trade-off: busy waiting uses up CPU time, whereas blocking may cause additional context switches.</dd>
 <dt>concurrency</dt>
