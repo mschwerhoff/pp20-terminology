@@ -1,6 +1,7 @@
 import markdown
 import codecs
 import jinja2
+import pathlib
 
 # markdown.markdownFromFile(
 #     input="terminology.md", 
@@ -25,8 +26,10 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader('./'))
 jinja_template = jinja_env.get_template("template.html")
 jinja_output = jinja_template.render(content=html)
 
+pathlib.Path("target").mkdir(parents=True, exist_ok=True)
+
 output_file = codecs.open(
-    "terminology.html",
+    "target/terminology.html",
     "w",
     encoding="utf-8",
     errors="xmlcharrefreplace")

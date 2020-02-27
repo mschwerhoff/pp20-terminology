@@ -1,6 +1,9 @@
 name: Compile terminology list
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
 
 jobs:
   build:
@@ -8,21 +11,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
     - name: Set up Python 3.8
       uses: actions/setup-python@v1
       with:
         python-version: 3.8
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install Jinja2
         pip install markdown
+
     - name: Compile list
       run: |
         python compile.py
-    - name: Upload generated file
-      uses: actions/upload-artifact@v1
+
+    # - name: Upload generated file
+    #   uses: actions/upload-artifact@v1
+    #   with:
+    #     name: terminology
+    #     path: terminology.html
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
-        name: terminology
-        path: terminology.html
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages # The branch the action should deploy to
+        FOLDER: target   # The folder the action should deploy
