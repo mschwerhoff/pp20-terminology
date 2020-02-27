@@ -30,8 +30,8 @@ jobs:
 
     - name: Build
       run: |
-        python compile.py
-        cp *.css ./target/
+        python make.py
+        cp web/*.css ./target/
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
