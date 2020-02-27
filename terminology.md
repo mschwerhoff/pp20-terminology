@@ -7,7 +7,7 @@ abstractly atomic
 :   A statement or instruction that, at a certain level of abstraction, appears to be executed atomically. E.g. from a caller's perspective, a method `synchronized append(x)` of a queue appears to append element `x` in one step, but from the queue's perspective, this might take several steps.
 
 bad interleaving
-:   An interleaving that yields a problematic or otherwise undesirable computation. E.g. an incorrect result, a deadlock or nondeterministic output.
+:   An interleaving that yields a problematic or otherwise undesirable computation. E.g. an incorrect result, a deadlock or non-deterministic output.
 
 busy waiting
 :   Occurs when a thead busily (actively) waits for a condition to become true by spinning in a loop. In the opposite scenario, the thread sleeps (i.e. is blocked; in Java: `join()`, `wait()`) until the condition becomes true. Trade-off: busy waiting uses up CPU time, whereas blocking may cause additional context switches.
