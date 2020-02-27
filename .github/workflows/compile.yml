@@ -28,15 +28,11 @@ jobs:
         pip install Jinja2
         pip install markdown
 
-    - name: Compile list
+    - name: Build
       run: |
         python compile.py
+        cp *.css ./target/
 
-    # - name: Upload generated file
-    #   uses: actions/upload-artifact@v1
-    #   with:
-    #     name: terminology
-    #     path: terminology.html
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
