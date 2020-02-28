@@ -10,7 +10,7 @@ bad interleaving
 :   An interleaving that yields a problematic or otherwise undesirable computation. E.g. an incorrect result, a deadlock or non-deterministic output.
 
 busy waiting
-:   Occurs when a thead busily (actively) waits for a condition to become true by spinning in a loop. In the opposite scenario, the thread sleeps (i.e. is blocked; in Java: `join()`, `wait()`) until the condition becomes true. Trade-off: busy waiting uses up CPU time, whereas blocking may cause additional context switches.
+:   Occurs when a thead busily (actively) waits, e.g. by spinning in a loop, for a condition to become true. In the opposite scenario, the thread sleeps (i.e. is blocked; in Java: `join()`, `wait()`) until the condition becomes true. Trade-off: busy waiting uses up CPU time, whereas blocking may cause additional context switches.
 
 concurrency
 :   Parallelism that requires reasoning about and managing shared resources. Often used interchangeably with parallelism.
