@@ -30,7 +30,7 @@ jobs:
 
     - name: Make
       run: |
-        make.sh
+        ./make.sh
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
