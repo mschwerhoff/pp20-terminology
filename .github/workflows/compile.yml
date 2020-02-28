@@ -28,10 +28,9 @@ jobs:
         pip install Jinja2
         pip install markdown
 
-    - name: Build
+    - name: Make
       run: |
-        python make.py
-        cp web/*.css ./target/
+        make.sh
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
