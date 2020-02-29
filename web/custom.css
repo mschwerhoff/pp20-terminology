@@ -2,3 +2,11 @@
   font-weight: bold;
   margin-bottom: 0.0rem;
 }
+
+#footer {
+  text-align: center;
+  font-size: small;
+  background-color: #eee;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
