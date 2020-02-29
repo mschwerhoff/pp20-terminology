@@ -9,8 +9,17 @@
   <div id="content" class="container">
     {{content}}
   </div>
-  <div id="footer">
-    Last updated {{last_updated}}
+  <div id="footer" style="line-height: 0; padding-top: 0.5rem; padding-bottom: 0.5rem;">
+    <span class="centered-vi">
+      <span class="svg-markdown" style="width: 18px; height: 18px; margin-right: 5px;">&nbsp;</span>
+      Last updated {{last_updated}}
+      <span class="separator-h">&nbsp;</span>
+      <span class="svg-git" style="width: 20px; height: 20px;">&nbsp;</span>
+      <a href="{{github_revision_url}}">{{git_revision}}</a>
+      <span class="separator-h">&nbsp;</span>
+      <span class="svg-github" style="width: 16px; height: 16px; margin-right: 4px;">&nbsp;</span>
+      <a href="{{github_repository_url}}">Sources</a>
+    </span>
   </div>
 </div>
 </body>

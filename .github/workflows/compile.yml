@@ -27,6 +27,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install Jinja2
         pip install markdown
+        pip install gitpython
 
     - name: Make
       run: |
