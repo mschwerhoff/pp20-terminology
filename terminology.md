@@ -12,6 +12,9 @@ bad interleaving
 busy waiting
 :   Occurs when a thead busily (actively) waits, e.g. by spinning in a loop, for a condition to become true. In the opposite scenario, the thread sleeps (i.e. is blocked; in Java: `join()`, `wait()`) until the condition becomes true. Trade-off: busy waiting uses up CPU time, whereas blocking may cause additional context switches.
 
+cache coherence protocols
+:   Hardware protocols that ensure consistency across caches, typically by tracking which locations are cached, and synchronising them if necessary.
+
 concurrency
 :   Parallelism that requires reasoning about and managing shared resources. Often used interchangeably with parallelism.
 
@@ -27,6 +30,12 @@ data race
 deadlock
 :   Circular waiting/blocking (no instructions are executed/CPU time is used) between threads, so that the system (union of all threads) cannot make any progress anymore.
 
+functional unit
+:   A component of a CPU (or core) that performs a certain task, e.g. executing integer arithmetic operations.
+
+instruction level parallelism
+:   CPU-internal parallelisation of independent instructions, with the goal of improving performance by increasing utilisation of a CPU's functional units.
+
 interleaving
 :   Given multiple threads, each executing a sequence of instructions, an interleaving is a sequence of instructions obtained from merging the individual sequences. A sequentially consistent interleaving is one where the relative order of statements from one thread is preserved.
 
@@ -35,6 +44,13 @@ livelock
 
 liveness property
 :   Property of a system: "something good eventually happens". Can only be violated in infinite time. Infinite loops and starvation are typical safety properties. Will be formally defined in Formal Methods using temporal logic.
+
+locality
+:   Has several meanings in the context of parallel programming:
+
+  1. Locally reason about one thread at a time (also known as thread modularity). Simplifies correctness arguments.
+  2. Data locality: related memory locations are accessed shortly after each other. Improves performance by optimal cache usage.
+  3. Code locality: straight-line code increases opportunities for instruction level parallelism
 
 lock
 :   In general, a token/resource that can be acquired by at most one thread at a time. Locks are typically provided by a programming language to enforce mutual exclusion, by guarding/protecting a critical section. A lock can be acquired/locked by a thread, and is then held until it is released/unlocked. In Java, each object can be used as a lock (intrinsic/monitor lock), but the JDK also provides more complex locks.
@@ -89,3 +105,6 @@ thread
 
 thread mapping
 :   How a Java/JVM thread is related to an operating system thread. In native threading (most common), each JVM thread is mapped to a dedicated operating system thread. In green threading, the JVM maps several threads to a single operating system thread.
+
+vectorisation
+:   Using special machine code instructions to execute a single operation (e.g. plus) on a chunk of data (e.g. an array segment). Can significantly improve performance. Code can be vectorised automatically, by compilers, or manually, by using intrinsics libraries provided by hardware vendors.
