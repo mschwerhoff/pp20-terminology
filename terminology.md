@@ -15,6 +15,9 @@ busy waiting
 cache coherence protocols
 :   Hardware protocols that ensure consistency across caches, typically by tracking which locations are cached, and synchronising them if necessary.
 
+CISC, RISC
+:   CISC (complex instruction set computer) and RISC (reduced instruction set computer) are two fundamental CPU architecture models. Classical RISC is easier to study, since simpler: e.g. RISC instructions can only work on registers, and reading/writing memory are separate instructions.
+
 concurrency
 :   Parallelism that requires reasoning about and managing shared resources. Often used interchangeably with parallelism.
 
@@ -31,13 +34,16 @@ deadlock
 :   Circular waiting/blocking (no instructions are executed/CPU time is used) between threads, so that the system (union of all threads) cannot make any progress anymore.
 
 functional unit
-:   A component of a CPU (or core) that performs a certain task, e.g. executing integer arithmetic operations.
+:   A component of a CPU (or core) that performs a certain task, e.g. executing integer arithmetic operations. An execution unit is one such a functional unit, see also RISC.
 
 instruction level parallelism
 :   CPU-internal parallelisation of independent instructions, with the goal of improving performance by increasing utilisation of a CPU's functional units.
 
 interleaving
 :   Given multiple threads, each executing a sequence of instructions, an interleaving is a sequence of instructions obtained from merging the individual sequences. A sequentially consistent interleaving is one where the relative order of statements from one thread is preserved.
+
+latency
+:   An evaluation metric for pipelines. Latency measures the time a pipeline needs to process a given work item (e.g. a CPU instruction).
 
 livelock
 :   A situation in which all threads starve by infinitely often try to enter a critical section, but never succeeding. Similar to a deadlock, the system makes no real progress, although the threads execute statements/use CPU time.
@@ -99,6 +105,9 @@ synchronisation
 
 synchronized
 :   Java keyword, enforcing mutual exclusion for a critical section via some object's intrinsic lock.
+
+throughput
+:   An evaluation metric for pipelines. Throughput measures the amount of work (e.g. CPU instructions) that can be done by a pipeline in a given period of time.
 
 thread
 :   In general, an independent (i.e. capable of running in parallel) unit of computation that executes a piece of code. The concept of threads exists on various levels: hardware (CPU), operating systems, programming languages. In Java, also an instance of the `Thread` class.
