@@ -6,7 +6,7 @@ atomic
 abstractly atomic
 :   A statement or instruction that, at a certain level of abstraction, appears to be executed atomically. E.g. from a caller's perspective, a method `synchronized append(x)` of a queue appears to append element `x` in one step, but from the queue's perspective, this might take several steps.
 
-amdahl's law
+Amdahl's law
 :   Specifies the maximum amount of speedup that can be achieved for a program with a given sequential part. The pessimistic view on scalability.
 
 bad interleaving
@@ -17,6 +17,9 @@ busy waiting
 
 cache coherence protocols
 :   Hardware protocols that ensure consistency across caches, typically by tracking which locations are cached, and synchronising them if necessary.
+
+cilk-style programming
+:   Parallel programming idiom: To compute a program, execute code and spawn new tasks if required. Before returning, wait for all spawned tasks to complete. The system manages the eventual execution of the spawned tasks potentially in parallel. spawning and waiting on tasks creates a task graph which is a DAG.
 
 CISC, RISC
 :   CISC (complex instruction set computer) and RISC (reduced instruction set computer) are two fundamental CPU architecture models. Classical RISC is easier to study, since simpler: e.g. RISC instructions can only work on registers, and reading/writing memory are separate instructions.
@@ -33,11 +36,17 @@ critical section
 data race
 :   A program has a data race if, during any possible execution, a memory location could be written from one thread, while concurrently being read or written from another thread. Data race is often used interchangeably with race condition.
 
+divide and conquer style parallelism
+:   Also called recursive splitting. Solve a problem in divide and conquer style: solve a larger problem by recursively solving smaller sub-problems and combine their results. Solve the sub-problems in separate threads to gain a speedup. This way, work can be decomposed recursively to small tasks that can be efficiently scheduled on available tasks using e.g. the ForkJoin framework.
+
 deadlock
 :   Circular waiting/blocking (no instructions are executed/CPU time is used) between threads, so that the system (union of all threads) cannot make any progress anymore.
 
 efficiency
 :   Efficiency expresses, how much of the available cpu performance can be used. Heavily limited by the sequential part of a program. Efficiency = S<sub>p</sub>/p.
+
+ForkJoin framework
+:   Introduced in Java 7, this framework embraces divide and conquer parallelism. Tasks can be spawned (forked) and joined by the framework. The ForkJoin framework automatically automatically assigns these tasks (lightweight) to Java threads (heavyweight) and may also execute multiple tasks in one thread to avoid thread context switching overhead.
 
 functional unit
 :   A component of a CPU (or core) that performs a certain task, e.g. executing integer arithmetic operations. An execution unit is one such a functional unit, see also RISC.
@@ -45,10 +54,10 @@ functional unit
 granularity
 :   Coarse vs. fine: Splitting work into large tasks (coarse) reduces overhead, but might not use all available threads. Small tasks (fine granular) can be parallelized more, but also add more overhead. The trick is to find a "reasonable" size to minimize overhead and maximize parallelism.
 
-gustafson's law
+Gustafson's law
 :   Specifies how much more work can be performed for a given fixed amount of time by adding more processors. The optimistic view on scalability.
 
-instruction level parallelism
+instruction level parallelism (ILP)
 :   CPU-internal parallelisation of independent instructions, with the goal of improving performance by increasing utilisation of a CPU's functional units.
 
 interleaving
@@ -89,7 +98,7 @@ parallelism
 :   Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency. Parallelism can be specified explicitely by manually assigning tasks to threads or implicitely by using a framework that takes care of distributing tasks to threads.
 
 parallel execution time
-:   T<sub>p</sub>: The time that is required to perform some work on p processors.
+:   T<sub>p</sub>: The time that is required to perform some work on p processors. T<sub>∞</sub> denotes the time required for some work if we had an infinite amount of processors. In this scenario, the total runtime only depends on the time it takes to execute the sequential part of a program.
 
 process
 :   Independently running instance of a program/application, typically on the operation system level. Similar to a thread, but usually more heavy-weight (since a whole program) and encapsulated in memory.
@@ -109,6 +118,9 @@ safety property
 sequential execution time
 :   T<sub>1</sub>: The time that is required to perform some work on a single processor.
 
+sequential cutoff
+:   When decomposing work into tasks, stop splitting tasks at a given problem size (sequential cutoff). Problem size should be significantly larger than scheduling overhead.
+
 sequential part
 :   Part of a given program that can't be executed in parallel. Limits the maximum speedup.
 
@@ -118,11 +130,14 @@ scalability
 scheduler
 :   A management process, e.g. on the operating system level, that performs context switches. I.e. it interrupts/pauses/sends to sleep the currently running process (or thread), performs a context switch, and selects the next process (or thread) to run. Schedulers typically do not give guarantees when and how often they act, who gets selected next, etc.
 
+scheduling overhead
+:   The extra time spent by the system or the algorithm to distribute work on multiple threads/tasks.
+
 shared resource
 :   Any resource (memory location, input source, output sink, ...) shared by more than one thread.
 
 speedup
-:   S<sub>p</sub>: How much faster does a program run using p processors, compared to running the sequential version of the same program. S<sub>p</sub> = T<sub>1</sub>/T<sub>p</sub>. Speedup is an absolute value. The relative value is called "efficiency"
+:   S<sub>p</sub>: How much faster does a program run using p processors, compared to running the sequential version of the same program. S<sub>p</sub> = T<sub>1</sub>/T<sub>p</sub>. Speedup is an absolute value. The relative value is called "efficiency".
 
 starvation
 :   A thread starves if it can never enter a/any critical section.
@@ -132,6 +147,9 @@ synchronisation
 
 synchronized
 :   Java keyword, enforcing mutual exclusion for a critical section via some object's intrinsic lock.
+
+task graph, work, span
+:   Graph (DAG) created by drawing nodes (tasks) and edges (spawns, joins).  **Work** in a task graph (T<sub>1</sub>) is the sum of the cost of all nodes in the graph. **span** is the critical path (height) of the task graph. Corresponds to T<sub>∞</sub>.
 
 throughput
 :   An evaluation metric for pipelines. Throughput measures the amount of work (e.g. CPU instructions) that can be done by a pipeline in a given period of time.
@@ -144,6 +162,9 @@ thread mapping
 
 vectorisation
 :   Using special machine code instructions to execute a single operation (e.g. plus) on a chunk of data (e.g. an array segment). Can significantly improve performance. Code can be vectorised automatically, by compilers, or manually, by using intrinsics libraries provided by hardware vendors.
+
+warm-up
+:   In order to perform optimally, the JVM often needs some time to 'learn' what kind of code is typically being executed. This applies also and especially to the ForkJoin framework, which needs some time to optimally distribute task on threads.
 
 work partitioning
 :   Split-up of a program into smaller tasks that can be executed in parallel. Ideally, each task performs its work independently of any other task, for instance on separate areas of a data structure.
