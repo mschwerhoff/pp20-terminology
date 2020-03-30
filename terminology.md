@@ -85,6 +85,9 @@ lock
 lockout
 :   Needlessly preventing a thread from entering a critical section.
 
+maps
+:   A map operatoes on each element of a collection independently to create a new collection of the same size. For instance vector addition that computes the sum of a collection of tuples (containing the n<sup>th</sup> element of both vectors).
+
 mutual exclusion
 :   Preventing more than one thread from being in a critical section, i.e. to execute a piece of code, at a given moment in time.
 
@@ -97,6 +100,9 @@ multithreading
 parallelism
 :   Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency. Parallelism can be specified explicitely by manually assigning tasks to threads or implicitely by using a framework that takes care of distributing tasks to threads.
 
+parallelism (speedup)
+:   Parallelizm is the maximum possible speedup: T<sub>1</sub>/T<sub>∞</sub>
+
 parallel execution time
 :   T<sub>p</sub>: The time that is required to perform some work on p processors. T<sub>∞</sub> denotes the time required for some work if we had an infinite amount of processors. In this scenario, the total runtime only depends on the time it takes to execute the sequential part of a program.
 
@@ -108,6 +114,9 @@ process context
 
 race condition
 :   A program has a race condition if, during any possible execution with the same inputs, its observable behaviour (results, output, ...) may change if events happen in different order. Events here are typically scheduler interactions causing different interleavings, but could also be, e.g. changing network latency. Race condition is often used interchangeably with data race.
+
+reductions
+:   produce a single answer from a collection via an associative operator. Examples: max, count, rightmost, sum, ...
 
 reentrancy
 :   A lock is reentrant if it can be acquired (and released) multiple times by the same thread. If a lock is non-reentrant, trying to acquire it again might cause an exception or other problems.
