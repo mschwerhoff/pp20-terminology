@@ -13,6 +13,8 @@
 <dd>A statement or instruction is (truly) atomic if it is executed by the CPU in a single, non-interruptible step.</dd>
 <dt>abstractly atomic</dt>
 <dd>A statement or instruction that, at a certain level of abstraction, appears to be executed atomically. E.g. from a caller's perspective, a method <code>synchronized append(x)</code> of a queue appears to append element <code>x</code> in one step, but from the queue's perspective, this might take several steps.</dd>
+<dt>amdahl's law</dt>
+<dd>Specifies the maximum amount of speedup that can be achieved for a program with a given sequential part. The pessimistic view on scalability.</dd>
 <dt>bad interleaving</dt>
 <dd>An interleaving that yields a problematic or otherwise undesirable computation. E.g. an incorrect result, a deadlock or non-deterministic output.</dd>
 <dt>busy waiting</dt>
@@ -31,10 +33,14 @@
 <dd>A program has a data race if, during any possible execution, a memory location could be written from one thread, while concurrently being read or written from another thread. Data race is often used interchangeably with race condition.</dd>
 <dt>deadlock</dt>
 <dd>Circular waiting/blocking (no instructions are executed/CPU time is used) between threads, so that the system (union of all threads) cannot make any progress anymore.</dd>
+<dt>efficiency</dt>
+<dd>Efficiency expresses, how much of the available cpu performance can be used. Heavily limited by the sequential part of a program. Efficiency = S<sub>p</sub>/p.</dd>
 <dt>functional unit</dt>
 <dd>A component of a CPU (or core) that performs a certain task, e.g. executing integer arithmetic operations. An execution unit is one such a functional unit, see also RISC.</dd>
 <dt>granularity</dt>
 <dd>Coarse vs. fine: Splitting work into large tasks (coarse) reduces overhead, but might not use all available threads. Small tasks (fine granular) can be parallelized more, but also add more overhead. The trick is to find a "reasonable" size to minimize overhead and maximize parallelism.</dd>
+<dt>gustafson's law</dt>
+<dd>Specifies how much more work can be performed for a given fixed amount of time by adding more processors. The optimistic view on scalability.</dd>
 <dt>instruction level parallelism</dt>
 <dd>CPU-internal parallelisation of independent instructions, with the goal of improving performance by increasing utilisation of a CPU's functional units.</dd>
 <dt>interleaving</dt>
@@ -67,7 +73,7 @@
 <dt>parallelism</dt>
 <dd>Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency. Parallelism can be specified explicitely by manually assigning tasks to threads or implicitely by using a framework that takes care of distributing tasks to threads.</dd>
 <dt>parallel execution time</dt>
-<dd>T<sub>p</sub>. The time that is required to perform some work on p processors.</dd>
+<dd>T<sub>p</sub>: The time that is required to perform some work on p processors.</dd>
 <dt>process</dt>
 <dd>Independently running instance of a program/application, typically on the operation system level. Similar to a thread, but usually more heavy-weight (since a whole program) and encapsulated in memory.</dd>
 <dt>process context</dt>
@@ -79,13 +85,17 @@
 <dt>safety property</dt>
 <dd>Property of a system: "nothing bad ever happens". Can be violated in finite time. Exceptions, absence of deadlocks, and mutual exclusion are typical safety properties. Will be formally defined in Formal Methods using temporal logic.</dd>
 <dt>sequential execution time</dt>
-<dd>T<sub>1</sub>. The time that is required to perform some work on a single processor.</dd>
+<dd>T<sub>1</sub>: The time that is required to perform some work on a single processor.</dd>
+<dt>sequential part</dt>
+<dd>Part of a given program that can't be executed in parallel. Limits the maximum speedup.</dd>
 <dt>scalability</dt>
 <dd>In our context: By how much can a program be parallelized. What is the maximum speedup that can be achieved, given an infinite amount of processors. See "speedup".</dd>
 <dt>scheduler</dt>
 <dd>A management process, e.g. on the operating system level, that performs context switches. I.e. it interrupts/pauses/sends to sleep the currently running process (or thread), performs a context switch, and selects the next process (or thread) to run. Schedulers typically do not give guarantees when and how often they act, who gets selected next, etc.</dd>
 <dt>shared resource</dt>
 <dd>Any resource (memory location, input source, output sink, ...) shared by more than one thread.</dd>
+<dt>speedup</dt>
+<dd>S<sub>p</sub>: How much faster does a program run using p processors, compared to running the sequential version of the same program. S<sub>p</sub> = T<sub>1</sub>/T<sub>p</sub>. Speedup is an absolute value. The relative value is called "efficiency"</dd>
 <dt>starvation</dt>
 <dd>A thread starves if it can never enter a/any critical section.</dd>
 <dt>synchronisation</dt>
@@ -107,10 +117,10 @@
   <div id="footer" style="line-height: 0; padding-top: 0.5rem; padding-bottom: 0.5rem;">
     <span class="centered-vi">
       <span class="svg-markdown" style="width: 18px; height: 18px; margin-right: 5px;">&nbsp;</span>
-      Last updated 2020-03-30 16:12 GMT
+      Last updated 2020-03-30 16:26 GMT
       <span class="separator-h">&nbsp;</span>
       <span class="svg-git" style="width: 20px; height: 20px;">&nbsp;</span>
-      <a href="https://github.com/mschwerhoff/pp20-terminology/commit/c29e64a27deca46fe75bf84921472cdf2eeff418">c29e64a27d</a>
+      <a href="https://github.com/mschwerhoff/pp20-terminology/commit/857b20b23ad0e074b96af52fe18de02d960800ef">857b20b23a</a>
       <span class="separator-h">&nbsp;</span>
       <span class="svg-github" style="width: 16px; height: 16px; margin-right: 4px;">&nbsp;</span>
       <a href="https://github.com/mschwerhoff/pp20-terminology">Sources</a>
