@@ -36,6 +36,9 @@ deadlock
 functional unit
 :   A component of a CPU (or core) that performs a certain task, e.g. executing integer arithmetic operations. An execution unit is one such a functional unit, see also RISC.
 
+granularity
+:   Coarse vs. fine: Splitting work into large tasks (coarse) reduces overhead, but might not use all available threads. Small tasks (fine granular) can be parallelized more, but also add more overhead. The trick is to find a "reasonable" size to minimize overhead and maximize parallelism.
+
 instruction level parallelism
 :   CPU-internal parallelisation of independent instructions, with the goal of improving performance by increasing utilisation of a CPU's functional units.
 
@@ -74,7 +77,10 @@ multithreading
 :   Threads running in parallel.
 
 parallelism
-:   Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency.
+:   Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency. Parallelism can be specified explicitely by manually assigning tasks to threads or implicitely by using a framework that takes care of distributing tasks to threads.
+
+parallel execution time
+:   $T_p$. The time that is required to perform some work on $p$ processors.
 
 process
 :   Independently running instance of a program/application, typically on the operation system level. Similar to a thread, but usually more heavy-weight (since a whole program) and encapsulated in memory.
@@ -90,6 +96,12 @@ reentrancy
 
 safety property
 :   Property of a system: "nothing bad ever happens". Can be violated in finite time. Exceptions, absence of deadlocks, and mutual exclusion are typical safety properties. Will be formally defined in Formal Methods using temporal logic.
+
+sequential execution time
+:   $T_1$. The time that is required to perform some work on a single processor.
+
+scalability
+:   In our context: By how much can a program be parallelized. What is the maximum speedup that can be achieved, given an infinite amount of processors. See "speedup".
 
 scheduler
 :   A management process, e.g. on the operating system level, that performs context switches. I.e. it interrupts/pauses/sends to sleep the currently running process (or thread), performs a context switch, and selects the next process (or thread) to run. Schedulers typically do not give guarantees when and how often they act, who gets selected next, etc.
@@ -117,3 +129,6 @@ thread mapping
 
 vectorisation
 :   Using special machine code instructions to execute a single operation (e.g. plus) on a chunk of data (e.g. an array segment). Can significantly improve performance. Code can be vectorised automatically, by compilers, or manually, by using intrinsics libraries provided by hardware vendors.
+
+work partitioning
+:   Split-up of a program into smaller tasks that can be executed in parallel. Ideally, each task performs its work independently of any other task, for instance on separate areas of a data structure.
