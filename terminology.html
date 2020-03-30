@@ -33,6 +33,8 @@
 <dd>Circular waiting/blocking (no instructions are executed/CPU time is used) between threads, so that the system (union of all threads) cannot make any progress anymore.</dd>
 <dt>functional unit</dt>
 <dd>A component of a CPU (or core) that performs a certain task, e.g. executing integer arithmetic operations. An execution unit is one such a functional unit, see also RISC.</dd>
+<dt>granularity</dt>
+<dd>Coarse vs. fine: Splitting work into large tasks (coarse) reduces overhead, but might not use all available threads. Small tasks (fine granular) can be parallelized more, but also add more overhead. The trick is to find a "reasonable" size to minimize overhead and maximize parallelism.</dd>
 <dt>instruction level parallelism</dt>
 <dd>CPU-internal parallelisation of independent instructions, with the goal of improving performance by increasing utilisation of a CPU's functional units.</dd>
 <dt>interleaving</dt>
@@ -63,7 +65,9 @@
 <dt>multithreading</dt>
 <dd>Threads running in parallel.</dd>
 <dt>parallelism</dt>
-<dd>Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency.</dd>
+<dd>Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency. Parallelism can be specified explicitely by manually assigning tasks to threads or implicitely by using a framework that takes care of distributing tasks to threads.</dd>
+<dt>parallel execution time</dt>
+<dd>$T_p$. The time that is required to perform some work on $p$ processors.</dd>
 <dt>process</dt>
 <dd>Independently running instance of a program/application, typically on the operation system level. Similar to a thread, but usually more heavy-weight (since a whole program) and encapsulated in memory.</dd>
 <dt>process context</dt>
@@ -74,6 +78,10 @@
 <dd>A lock is reentrant if it can be acquired (and released) multiple times by the same thread. If a lock is non-reentrant, trying to acquire it again might cause an exception or other problems.</dd>
 <dt>safety property</dt>
 <dd>Property of a system: "nothing bad ever happens". Can be violated in finite time. Exceptions, absence of deadlocks, and mutual exclusion are typical safety properties. Will be formally defined in Formal Methods using temporal logic.</dd>
+<dt>sequential execution time</dt>
+<dd>$T_1$. The time that is required to perform some work on a single processor.</dd>
+<dt>scalability</dt>
+<dd>In our context: By how much can a program be parallelized. What is the maximum speedup that can be achieved, given an infinite amount of processors. See "speedup".</dd>
 <dt>scheduler</dt>
 <dd>A management process, e.g. on the operating system level, that performs context switches. I.e. it interrupts/pauses/sends to sleep the currently running process (or thread), performs a context switch, and selects the next process (or thread) to run. Schedulers typically do not give guarantees when and how often they act, who gets selected next, etc.</dd>
 <dt>shared resource</dt>
@@ -92,15 +100,17 @@
 <dd>How a Java/JVM thread is related to an operating system thread. In native threading (most common), each JVM thread is mapped to a dedicated operating system thread. In green threading, the JVM maps several threads to a single operating system thread.</dd>
 <dt>vectorisation</dt>
 <dd>Using special machine code instructions to execute a single operation (e.g. plus) on a chunk of data (e.g. an array segment). Can significantly improve performance. Code can be vectorised automatically, by compilers, or manually, by using intrinsics libraries provided by hardware vendors.</dd>
+<dt>work partitioning</dt>
+<dd>Split-up of a program into smaller tasks that can be executed in parallel. Ideally, each task performs its work independently of any other task, for instance on separate areas of a data structure.</dd>
 </dl>
   </div>
   <div id="footer" style="line-height: 0; padding-top: 0.5rem; padding-bottom: 0.5rem;">
     <span class="centered-vi">
       <span class="svg-markdown" style="width: 18px; height: 18px; margin-right: 5px;">&nbsp;</span>
-      Last updated 2020-03-16 13:01 GMT
+      Last updated 2020-03-30 16:05 GMT
       <span class="separator-h">&nbsp;</span>
       <span class="svg-git" style="width: 20px; height: 20px;">&nbsp;</span>
-      <a href="https://github.com/mschwerhoff/pp20-terminology/commit/ebeb2c8117d6ec661780dc80d5507b2f050bd19e">ebeb2c8117</a>
+      <a href="https://github.com/mschwerhoff/pp20-terminology/commit/c16668aee7b567cdc9ee59fed3f325f566862f6b">c16668aee7</a>
       <span class="separator-h">&nbsp;</span>
       <span class="svg-github" style="width: 16px; height: 16px; margin-right: 4px;">&nbsp;</span>
       <a href="https://github.com/mschwerhoff/pp20-terminology">Sources</a>
