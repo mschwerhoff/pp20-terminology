@@ -80,7 +80,7 @@ parallelism
 :   Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency. Parallelism can be specified explicitely by manually assigning tasks to threads or implicitely by using a framework that takes care of distributing tasks to threads.
 
 parallel execution time
-:   $T_p$. The time that is required to perform some work on $p$ processors.
+:   T<sub>p</sub>. The time that is required to perform some work on p processors.
 
 process
 :   Independently running instance of a program/application, typically on the operation system level. Similar to a thread, but usually more heavy-weight (since a whole program) and encapsulated in memory.
@@ -98,7 +98,7 @@ safety property
 :   Property of a system: "nothing bad ever happens". Can be violated in finite time. Exceptions, absence of deadlocks, and mutual exclusion are typical safety properties. Will be formally defined in Formal Methods using temporal logic.
 
 sequential execution time
-:   $T_1$. The time that is required to perform some work on a single processor.
+:   T<sub>1</sub>. The time that is required to perform some work on a single processor.
 
 scalability
 :   In our context: By how much can a program be parallelized. What is the maximum speedup that can be achieved, given an infinite amount of processors. See "speedup".
