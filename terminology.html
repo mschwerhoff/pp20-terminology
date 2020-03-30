@@ -13,7 +13,7 @@
 <dd>A statement or instruction is (truly) atomic if it is executed by the CPU in a single, non-interruptible step.</dd>
 <dt>abstractly atomic</dt>
 <dd>A statement or instruction that, at a certain level of abstraction, appears to be executed atomically. E.g. from a caller's perspective, a method <code>synchronized append(x)</code> of a queue appears to append element <code>x</code> in one step, but from the queue's perspective, this might take several steps.</dd>
-<dt>amdahl's law</dt>
+<dt>Amdahl's law</dt>
 <dd>Specifies the maximum amount of speedup that can be achieved for a program with a given sequential part. The pessimistic view on scalability.</dd>
 <dt>bad interleaving</dt>
 <dd>An interleaving that yields a problematic or otherwise undesirable computation. E.g. an incorrect result, a deadlock or non-deterministic output.</dd>
@@ -21,6 +21,8 @@
 <dd>Occurs when a thead busily (actively) waits, e.g. by spinning in a loop, for a condition to become true. In the opposite scenario, the thread sleeps (i.e. is blocked; in Java: <code>join()</code>, <code>wait()</code>) until the condition becomes true. Trade-off: busy waiting uses up CPU time, whereas blocking may cause additional context switches.</dd>
 <dt>cache coherence protocols</dt>
 <dd>Hardware protocols that ensure consistency across caches, typically by tracking which locations are cached, and synchronising them if necessary.</dd>
+<dt>cilk-style programming</dt>
+<dd>Parallel programming idiom: To compute a program, execute code and spawn new tasks if required. Before returning, wait for all spawned tasks to complete. The system manages the eventual execution of the spawned tasks potentially in parallel. spawning and waiting on tasks creates a task graph which is a DAG.</dd>
 <dt>CISC, RISC</dt>
 <dd>CISC (complex instruction set computer) and RISC (reduced instruction set computer) are two fundamental CPU architecture models. Classical RISC is easier to study, since simpler: e.g. RISC instructions can only work on registers, and reading/writing memory are separate instructions.</dd>
 <dt>concurrency</dt>
@@ -31,17 +33,21 @@
 <dd>A piece of code that, in order to guarantee correct program execution, may only be executed by one thread at a time.</dd>
 <dt>data race</dt>
 <dd>A program has a data race if, during any possible execution, a memory location could be written from one thread, while concurrently being read or written from another thread. Data race is often used interchangeably with race condition.</dd>
+<dt>divide and conquer style parallelism</dt>
+<dd>Also called recursive splitting. Solve a problem in divide and conquer style: solve a larger problem by recursively solving smaller sub-problems and combine their results. Solve the sub-problems in separate threads to gain a speedup. This way, work can be decomposed recursively to small tasks that can be efficiently scheduled on available tasks using e.g. the ForkJoin framework.</dd>
 <dt>deadlock</dt>
 <dd>Circular waiting/blocking (no instructions are executed/CPU time is used) between threads, so that the system (union of all threads) cannot make any progress anymore.</dd>
 <dt>efficiency</dt>
 <dd>Efficiency expresses, how much of the available cpu performance can be used. Heavily limited by the sequential part of a program. Efficiency = S<sub>p</sub>/p.</dd>
+<dt>ForkJoin framework</dt>
+<dd>Introduced in Java 7, this framework embraces divide and conquer parallelism. Tasks can be spawned (forked) and joined by the framework. The ForkJoin framework automatically automatically assigns these tasks (lightweight) to Java threads (heavyweight) and may also execute multiple tasks in one thread to avoid thread context switching overhead.</dd>
 <dt>functional unit</dt>
 <dd>A component of a CPU (or core) that performs a certain task, e.g. executing integer arithmetic operations. An execution unit is one such a functional unit, see also RISC.</dd>
 <dt>granularity</dt>
 <dd>Coarse vs. fine: Splitting work into large tasks (coarse) reduces overhead, but might not use all available threads. Small tasks (fine granular) can be parallelized more, but also add more overhead. The trick is to find a "reasonable" size to minimize overhead and maximize parallelism.</dd>
-<dt>gustafson's law</dt>
+<dt>Gustafson's law</dt>
 <dd>Specifies how much more work can be performed for a given fixed amount of time by adding more processors. The optimistic view on scalability.</dd>
-<dt>instruction level parallelism</dt>
+<dt>instruction level parallelism (ILP)</dt>
 <dd>CPU-internal parallelisation of independent instructions, with the goal of improving performance by increasing utilisation of a CPU's functional units.</dd>
 <dt>interleaving</dt>
 <dd>Given multiple threads, each executing a sequence of instructions, an interleaving is a sequence of instructions obtained from merging the individual sequences. A sequentially consistent interleaving is one where the relative order of statements from one thread is preserved.</dd>
@@ -73,7 +79,7 @@
 <dt>parallelism</dt>
 <dd>Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency. Parallelism can be specified explicitely by manually assigning tasks to threads or implicitely by using a framework that takes care of distributing tasks to threads.</dd>
 <dt>parallel execution time</dt>
-<dd>T<sub>p</sub>: The time that is required to perform some work on p processors.</dd>
+<dd>T<sub>p</sub>: The time that is required to perform some work on p processors. T<sub>∞</sub> denotes the time required for some work if we had an infinite amount of processors. In this scenario, the total runtime only depends on the time it takes to execute the sequential part of a program.</dd>
 <dt>process</dt>
 <dd>Independently running instance of a program/application, typically on the operation system level. Similar to a thread, but usually more heavy-weight (since a whole program) and encapsulated in memory.</dd>
 <dt>process context</dt>
@@ -86,22 +92,28 @@
 <dd>Property of a system: "nothing bad ever happens". Can be violated in finite time. Exceptions, absence of deadlocks, and mutual exclusion are typical safety properties. Will be formally defined in Formal Methods using temporal logic.</dd>
 <dt>sequential execution time</dt>
 <dd>T<sub>1</sub>: The time that is required to perform some work on a single processor.</dd>
+<dt>sequential cutoff</dt>
+<dd>When decomposing work into tasks, stop splitting tasks at a given problem size (sequential cutoff). Problem size should be significantly larger than scheduling overhead.</dd>
 <dt>sequential part</dt>
 <dd>Part of a given program that can't be executed in parallel. Limits the maximum speedup.</dd>
 <dt>scalability</dt>
 <dd>In our context: By how much can a program be parallelized. What is the maximum speedup that can be achieved, given an infinite amount of processors. See "speedup".</dd>
 <dt>scheduler</dt>
 <dd>A management process, e.g. on the operating system level, that performs context switches. I.e. it interrupts/pauses/sends to sleep the currently running process (or thread), performs a context switch, and selects the next process (or thread) to run. Schedulers typically do not give guarantees when and how often they act, who gets selected next, etc.</dd>
+<dt>scheduling overhead</dt>
+<dd>The extra time spent by the system or the algorithm to distribute work on multiple threads/tasks.</dd>
 <dt>shared resource</dt>
 <dd>Any resource (memory location, input source, output sink, ...) shared by more than one thread.</dd>
 <dt>speedup</dt>
-<dd>S<sub>p</sub>: How much faster does a program run using p processors, compared to running the sequential version of the same program. S<sub>p</sub> = T<sub>1</sub>/T<sub>p</sub>. Speedup is an absolute value. The relative value is called "efficiency"</dd>
+<dd>S<sub>p</sub>: How much faster does a program run using p processors, compared to running the sequential version of the same program. S<sub>p</sub> = T<sub>1</sub>/T<sub>p</sub>. Speedup is an absolute value. The relative value is called "efficiency".</dd>
 <dt>starvation</dt>
 <dd>A thread starves if it can never enter a/any critical section.</dd>
 <dt>synchronisation</dt>
 <dd>Some form of orchestration via threads. Typically, to prevent bad interleavings.</dd>
 <dt>synchronized</dt>
 <dd>Java keyword, enforcing mutual exclusion for a critical section via some object's intrinsic lock.</dd>
+<dt>task graph, work, span</dt>
+<dd>Graph (DAG) created by drawing nodes (tasks) and edges (spawns, joins).  <strong>Work</strong> in a task graph (T<sub>1</sub>) is the sum of the cost of all nodes in the graph. <strong>span</strong> is the critical path (height) of the task graph. Corresponds to T<sub>∞</sub>.</dd>
 <dt>throughput</dt>
 <dd>An evaluation metric for pipelines. Throughput measures the amount of work (e.g. CPU instructions) that can be done by a pipeline in a given period of time.</dd>
 <dt>thread</dt>
@@ -110,6 +122,8 @@
 <dd>How a Java/JVM thread is related to an operating system thread. In native threading (most common), each JVM thread is mapped to a dedicated operating system thread. In green threading, the JVM maps several threads to a single operating system thread.</dd>
 <dt>vectorisation</dt>
 <dd>Using special machine code instructions to execute a single operation (e.g. plus) on a chunk of data (e.g. an array segment). Can significantly improve performance. Code can be vectorised automatically, by compilers, or manually, by using intrinsics libraries provided by hardware vendors.</dd>
+<dt>warm-up</dt>
+<dd>In order to perform optimally, the JVM often needs some time to 'learn' what kind of code is typically being executed. This applies also and especially to the ForkJoin framework, which needs some time to optimally distribute task on threads.</dd>
 <dt>work partitioning</dt>
 <dd>Split-up of a program into smaller tasks that can be executed in parallel. Ideally, each task performs its work independently of any other task, for instance on separate areas of a data structure.</dd>
 </dl>
@@ -117,10 +131,10 @@
   <div id="footer" style="line-height: 0; padding-top: 0.5rem; padding-bottom: 0.5rem;">
     <span class="centered-vi">
       <span class="svg-markdown" style="width: 18px; height: 18px; margin-right: 5px;">&nbsp;</span>
-      Last updated 2020-03-30 16:26 GMT
+      Last updated 2020-03-30 19:47 GMT
       <span class="separator-h">&nbsp;</span>
       <span class="svg-git" style="width: 20px; height: 20px;">&nbsp;</span>
-      <a href="https://github.com/mschwerhoff/pp20-terminology/commit/857b20b23ad0e074b96af52fe18de02d960800ef">857b20b23a</a>
+      <a href="https://github.com/mschwerhoff/pp20-terminology/commit/cd154b9ca7157e41abd3883954c2930401bed87d">cd154b9ca7</a>
       <span class="separator-h">&nbsp;</span>
       <span class="svg-github" style="width: 16px; height: 16px; margin-right: 4px;">&nbsp;</span>
       <a href="https://github.com/mschwerhoff/pp20-terminology">Sources</a>
