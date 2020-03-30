@@ -100,8 +100,8 @@ multithreading
 parallelism
 :   Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency. Parallelism can be specified explicitely by manually assigning tasks to threads or implicitely by using a framework that takes care of distributing tasks to threads.
 
-parallelism (speedup)
-:   Parallelizm is the maximum possible speedup: T<sub>1</sub>/T<sub>∞</sub>
+parallelism (max speedup)
+:   Parallelism is the maximum possible speedup: T<sub>1</sub>/T<sub>∞</sub>
 
 parallel execution time
 :   T<sub>p</sub>: The time that is required to perform some work on p processors. T<sub>∞</sub> denotes the time required for some work if we had an infinite amount of processors. In this scenario, the total runtime only depends on the time it takes to execute the sequential part of a program.
