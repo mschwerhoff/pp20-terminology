@@ -6,6 +6,9 @@ atomic
 abstractly atomic
 :   A statement or instruction that, at a certain level of abstraction, appears to be executed atomically. E.g. from a caller's perspective, a method `synchronized append(x)` of a queue appears to append element `x` in one step, but from the queue's perspective, this might take several steps.
 
+amdahl's law
+:   Specifies the maximum amount of speedup that can be achieved for a program with a given sequential part. The pessimistic view on scalability.
+
 bad interleaving
 :   An interleaving that yields a problematic or otherwise undesirable computation. E.g. an incorrect result, a deadlock or non-deterministic output.
 
@@ -33,11 +36,17 @@ data race
 deadlock
 :   Circular waiting/blocking (no instructions are executed/CPU time is used) between threads, so that the system (union of all threads) cannot make any progress anymore.
 
+efficiency
+:   Efficiency expresses, how much of the available cpu performance can be used. Heavily limited by the sequential part of a program. Efficiency = S<sub>p</sub>/p.
+
 functional unit
 :   A component of a CPU (or core) that performs a certain task, e.g. executing integer arithmetic operations. An execution unit is one such a functional unit, see also RISC.
 
 granularity
 :   Coarse vs. fine: Splitting work into large tasks (coarse) reduces overhead, but might not use all available threads. Small tasks (fine granular) can be parallelized more, but also add more overhead. The trick is to find a "reasonable" size to minimize overhead and maximize parallelism.
+
+gustafson's law
+:   Specifies how much more work can be performed for a given fixed amount of time by adding more processors. The optimistic view on scalability.
 
 instruction level parallelism
 :   CPU-internal parallelisation of independent instructions, with the goal of improving performance by increasing utilisation of a CPU's functional units.
@@ -80,7 +89,7 @@ parallelism
 :   Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency. Parallelism can be specified explicitely by manually assigning tasks to threads or implicitely by using a framework that takes care of distributing tasks to threads.
 
 parallel execution time
-:   T<sub>p</sub>. The time that is required to perform some work on p processors.
+:   T<sub>p</sub>: The time that is required to perform some work on p processors.
 
 process
 :   Independently running instance of a program/application, typically on the operation system level. Similar to a thread, but usually more heavy-weight (since a whole program) and encapsulated in memory.
@@ -98,7 +107,10 @@ safety property
 :   Property of a system: "nothing bad ever happens". Can be violated in finite time. Exceptions, absence of deadlocks, and mutual exclusion are typical safety properties. Will be formally defined in Formal Methods using temporal logic.
 
 sequential execution time
-:   T<sub>1</sub>. The time that is required to perform some work on a single processor.
+:   T<sub>1</sub>: The time that is required to perform some work on a single processor.
+
+sequential part
+:   Part of a given program that can't be executed in parallel. Limits the maximum speedup.
 
 scalability
 :   In our context: By how much can a program be parallelized. What is the maximum speedup that can be achieved, given an infinite amount of processors. See "speedup".
@@ -108,6 +120,9 @@ scheduler
 
 shared resource
 :   Any resource (memory location, input source, output sink, ...) shared by more than one thread.
+
+speedup
+:   S<sub>p</sub>: How much faster does a program run using p processors, compared to running the sequential version of the same program. S<sub>p</sub> = T<sub>1</sub>/T<sub>p</sub>. Speedup is an absolute value. The relative value is called "efficiency"
 
 starvation
 :   A thread starves if it can never enter a/any critical section.
