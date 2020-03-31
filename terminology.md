@@ -25,7 +25,7 @@ CISC, RISC
 :   CISC (complex instruction set computer) and RISC (reduced instruction set computer) are two fundamental CPU architecture models. Classical RISC is easier to study, since simpler: e.g. RISC instructions can only work on registers, and reading/writing memory are separate instructions.
 
 concurrency
-:   Parallelism that requires reasoning about and managing shared resources. Often used interchangeably with parallelism.
+:   Dealing with multiple things at the same time (as opposed to parallelism: doing multiple things at the same time). Reasoning about and managing shared resources. Often used interchangeably with parallelism.
 
 context switch
 :   Given a computation unit (CPU), a context switch denotes the action of switching the unit from one computation to another. Typically refers to switching between processes, but can also refer to switching between threads. Depending on the size of the context ("large" for a process, "small" for thread), a context switch might be computationally expensive, i.e. require comparably much CPU time.
@@ -98,7 +98,7 @@ multithreading
 :   Threads running in parallel.
 
 parallelism
-:   Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency. Parallelism can be specified explicitely by manually assigning tasks to threads or implicitely by using a framework that takes care of distributing tasks to threads.
+:   Doing mupltiple things at the same time (as opposed to concurrency: dealing with multiple things at the same time). Performing computations simultaneously; either actually, if sufficient computations units (CPUs, cores, ...) are available, or virtually, via some form of alternation. Often used interchangeably with concurrency. Parallelism can be specified explicitely by manually assigning tasks to threads or implicitely by using a framework that takes care of distributing tasks to threads.
 
 parallelism (max speedup)
 :   Parallelism is the maximum possible speedup: T<sub>1</sub>/T<sub>∞</sub>
